@@ -49,7 +49,7 @@ class LimeBase(object):
 
     def forward_selection(self, data, labels, weights, num_features):
         """Iteratively adds features to the model"""
-        clf = Ridge(alpha=0, fit_intercept=True, random_state=self.random_state)
+        clf = Ridge(alpha=0.00001, fit_intercept=True, random_state=self.random_state)
         used_features = []
         for _ in range(min(num_features, data.shape[1])):
             max_ = -100000000
@@ -76,7 +76,7 @@ class LimeBase(object):
         elif method == 'forward_selection':
             return self.forward_selection(data, labels, weights, num_features)
         elif method == 'highest_weights':
-            clf = Ridge(alpha=0, fit_intercept=True,
+            clf = Ridge(alpha=0.00001, fit_intercept=True,
                         random_state=self.random_state)
             clf.fit(data, labels, sample_weight=weights)
 
